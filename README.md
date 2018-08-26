@@ -18,7 +18,7 @@ Personalized Motivation-supportive Messages for Increasing Participation in Crow
 
 I'm currently working on improving the code for easier reuse by others. This includes:
 
-- Refactoring of the pilot-study Flask code to be usable by other surveys
+- Refactoring of the custom survey interface Flask code to be usable by other surveys
 - Refactoring the context specific contents so that the app can be redeployed easily in other contexts
 - Improving documentation
 
