@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Step 3 / 4: Many Ideas</h1>  
+
+  <p>The following questions are about your experience using our app Many Ideas.</p>
+
+  <hr>
+  
+  <form method="post">
+    {% include 'survey-items.html' %}
+  
+    <div class="actions">
+      <input type="submit" class="btn" value="Continue">
+    </div>
+  </form>
+{% endblock %}

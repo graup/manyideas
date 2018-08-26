@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UI Design Pilot Study</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div id="content">  
+      <div class="progress">
+          <div class="completed" style="width: {{100*completed_count/total_count}}%"></div>
+          <div class="status">Completed {{completed_count}} of {{total_count}} questions ({{(100*completed_count)//total_count}}%)</div>
+        </div> 
+      
+    <h1>Step 1 / 4</h1>  
+    <p><strong>Please take the following short personality test consisting of {{vignette|length}} items.</strong></p>
+    <p>These items refer to a series of hypothetical scenarios. Each scenario describes an incident and lists three ways of responding to it. Please <strong>read</strong> each scenario, <strong>imagine</strong> yourself in that situation, and then <strong>rate the likeliness</strong> of each of the possible responses. Here are some tips:</p>
+    <ul>
+      <li>We all respond in a variety of ways to situations, and probably most or all responses are at least slightly likely for you.</li>
+      <li>If it is very unlikely that you would respond the way described in a given response, you should select answer 1 or 2.</li>
+      <li>If it is moderately likely, you would select a number in the mid range.</li>
+      <li>If it is very likely that you would respond as described, you would select answer 6 or 7.</li>
+    </ul>
+
+    <p><strong>Please take your time.</strong> This questionaire is a major part of this task, and the data is important for our research.</p>
+    <hr>
+
+    <form method="post">
+
+    {% for item in vignette %}
+    {% set qloop = loop %}
+      <p><strong>{{loop.index}}. {{item.prompt}}</strong></p>
+      <ul class="answers">
+        {% for answer in item.answers %}
+          {% set aloop = loop %}
+          <li>
+            <div class="answer-text">{{answer}}</div>
+            <div class="rating-container">
+              <div class="rating">
+              {% for rating in range(1, 8) %}
+                <label>
+                    <input type="radio" name="rating_{{qloop.index0}}_{{aloop.index0}}" value="{{rating}}" required>
+                    {{rating}}
+                </label>
+              {% endfor %}
+              </div>
+              <div class="rating">
+                <span>very unlikely</span>
+                <span>moderately likely</span>
+                <span>very likely</span>
+              </div>
+            </div>
+
+          </li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+
+    <hr>
+    
+    <div class="actions">
+      <input type="submit" class="btn" value="Continue">
+    </div>
+
+    </form>
+  </div>
+  <script>
+    function fill_debug() {
+      var q = 0;
+      var a = 0;
+      var name;
+      for(q=0; q<12; q++) {
+        for(a=0; a<3; a++) {
+          name = 'rating_' + q + '_' + a;
+          document.forms[0].elements[name][a].checked = true;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Step 3 / 5: Online usage</h1>  
+
+  <hr>
+  
+  <form method="post">
+    {% include 'survey-items.html' %}
+  
+    <div class="actions">
+      <input type="submit" class="btn" value="Continue">
+    </div>
+  </form>
+{% endblock %}

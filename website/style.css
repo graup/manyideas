@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css?family=Patua+One|Raleway:300,500,600');
+
+body {
+    font-family: Raleway, sans-serif;
+    font-weight: 300;
+    font-size: 112.5%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0 0 1em;
+    line-height: 1.75;
+    text-align: justify;
+    hyphens: auto;
+}
+
+a, a:link, a:visited {
+    color: #43708F;
+    text-decoration: none;
+    font-weight: normal;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 500;
+    font-size: 111%;
+}
+
+.tagline {
+    font-size: 111%;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.footer {
+    font-size: 77.7%;
+}
+
+.logo {
+    color: #43708F;
+    font-family: 'Patua One', serif;
+    font-weight: normal;
+    font-size: 42px;
+    display: inline-block;
+
+    height: 85px;
+    width: 320px;
+    line-height: 85px;
+
+    margin: 3rem 0;
+}
+
+.logo span {
+    line-height: 1;
+    display: inline-block;
+    text-align: left;
+}
+.logo span em {
+    font-style: normal;
+    font-size: 80%;
+    color: #A32902;
+}
+
+.logo img {
+    width: auto;
+    height: 85px;
+}
+
+@media (max-width: 600px) {
+    .logo {
+        font-size: 35px;
+    }
+    .logo img {
+        height: 65px;
+    }
+}
+
+.btn, .btn:link, .btn:visited {
+    background-color: #43708F;
+    color: #fff;
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 90%;
+    line-height: 2.5;
+    padding: 0 1.5em;
+    font-weight: 600;
+}
+.btn:hover {
+    text-decoration: none;
+    background-color: rgb(50, 92, 121);
+}
+
+.btn-huge, .btn-huge:link, .btn-huge:visited  {
+    font-size: 110%;
+}
+
+.btn + .btn {
+    margin-left: 1em;
+}
+
+
+header {
+    text-align: center;
+    font-weight: 500;
+}
+
+section {
+}
+
+.wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+header, section {
+    margin-bottom: 2rem;
+}
+
+section.last {
+    margin-bottom: 0;
+}
+
+.odd {
+    padding: 5rem 0 4rem;
+
+    background-color: #f6f6f6;
+    clip-path: polygon(
+        0 calc(4vw),
+        100% 0,
+        100% calc(100% - 4vw),
+        0 100%
+    );
+}
+.odd.last {
+    padding-bottom: 2rem;
+    clip-path: polygon(
+        0 calc(4vw),
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+}
+
+@media (max-width: 600px) {
+    .odd {
+        padding: 3.5rem 0 2rem;
+    }
+}

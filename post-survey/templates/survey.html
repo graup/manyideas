@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Many Ideas Survey</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div id="content">
+    <form method="post">
+        <div class="progress">
+            <div class="completed" style="width: {{100*completed_count/total_count}}%"></div>
+            <div class="status">Completed {{completed_count}} of {{total_count}} questions ({{(100*completed_count)//total_count}}%)</div>
+          </div> 
+      <h1>Step 4 / 4</h1>  
+
+      <p>Good job! You're almost done, please just answer these final questions.</p>
+
+      <p><strong>Comparison results</strong></p>
+      {% if winner %}
+      <p>According to your ratings, this is the version that you prefer the most.</p>
+      <div class="survey-columns">
+        <img src="{{ url_for('static', filename='img/' + winner + '.png') }}" class="winner-image">
+
+        <div>
+          <div class="box">
+            <p><strong>Is this really a version you liked?</strong><br>
+                <label><input type="radio" name="result_correct" value="yes" required> Yes</label>
+                <label><input type="radio" name="result_correct" value="no" required> No</label>
+            </p>
+            <p><strong>Please explain in one sentence why you think you preferred (or did not prefer) this version:</strong><br>
+                <textarea name="result_reason" class="text-field" required></textarea>
+            </p>
+          </div>
+        </div>
+
+      </div>
+      {% else %}
+      
+      <p>It seems like you liked multiple versions equally.</p>
+      <div class="box">
+        <p><strong>Please explain any difficulty you had in deciding which version you prefer: </strong><br>
+          <textarea name="result_reason" class="text-field" required></textarea></p>
+      </div>
+      {% endif %}
+
+      <div class="box">
+        <p><strong>Thinking more generally, what would motivate you personally to participate in this app? Feel free to share any ideas or thoughts you have.</strong><br>
+          <textarea name="open" class="text-field" required></textarea></p>
+      </div>
+
+      <div class="actions">
+        <input type="submit" class="btn" value="Continue">
+      </div>
+
+    </div>
+  </form>
+</body>
+</html>

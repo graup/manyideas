@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Many Ideas Survey</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+<body>
+  <div class="logo-wrap">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo">
+  </div>
+  <div id="content">  
+    <div class="progress">
+      <div class="completed" style="width: {{100*completed_count/total_count}}%"></div>
+      <div class="status">Completed {{completed_count}} of {{total_count}} questions ({{(100*completed_count)//total_count}}%)</div>
+    </div> 
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

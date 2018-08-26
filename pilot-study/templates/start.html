@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UI Design Pilot Study</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div id="content">
+      <div class="progress">
+          <div class="completed" style="width: {{100*completed_count/total_count}}%"></div>
+          <div class="status">Completed {{completed_count}} of {{total_count}} questions ({{(100*completed_count)//total_count}}%)</div>
+        </div> 
+    <form method="post">
+    <h1>Welcome!</h1>
+    <p>In this study, you will<br>
+      (1) take a short personality test (ca. 5 minutes),<br>
+      (2) answer a set of questions regarding volunteering (ca. 3 minutes),<br>
+      (3) perform a series of pair comparisons (ca. 5 minutes),<br>
+      (4) answer a few more questions about the task (ca. 2 minutes).<br>
+      In total, this will take around 15-20 minutes of your time.</p>
+    <p>Please don't rush, and answer the questions with full concentration.
+      Your responses are important for our research on improving the experience of voluntary partcipation systems.</p>
+    <p>To start, please enter the following information and press Start.</p>
+
+    <div class="box">
+        <p><strong>Sex:</strong> <br>
+          <label><input type="radio" name="gender" value="female" required> Female</label>
+          <label><input type="radio" name="gender" value="male" required> Male</label>
+        </p>
+        <p><strong>Age:</strong> <br>
+          <select name="age" required>
+            <option value="">Please select</option>
+            <option value="1826">18-26</option>
+            <option value="2732">27-32</option>
+            <option value="3340">33-40</option>
+            <option value="4155">41-55</option>
+            <option value="56">56+</option>
+          </select>
+        </p>
+        <p><strong>Highest attained level of education:</strong> <br>
+          <select name="education" required>
+            <option value="">Please select</option>
+            <option value="0">No high school</option>
+            <option value="1">High school / GED</option>
+            <option value="2">Some college</option>
+            <option value="3">Bachelor's degree</option>
+            <option value="4">Master's degree</option>
+            <option value="5">PhD or higher</option>
+          </select>
+        </p>
+    </div>
+
+    <!--<p>Your user id: {{user_id}}#{{user_counter}}</p>-->
+
+    <div class="actions">
+      <input type="submit" class="btn" value="Start">
+    </div>
+    </form>
+  </div>
+</body>
+</html>

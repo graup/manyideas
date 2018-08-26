@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UI Design Pilot Study</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div id="content">
+      <div class="progress">
+          <div class="completed" style="width: {{100*completed_count/total_count}}%"></div>
+          <div class="status">Completed {{completed_count}} of {{total_count}} questions ({{(100*completed_count)//total_count}}%)</div>
+        </div> 
+
+        
+    <form method="post" id="compare_form">
+        <h1>Step 3 / 4</h1>  
+
+      <div class="steps" id="steps">
+
+        <div id="step0">
+          <p>Thank you! Great job so far. Your data is really important for us.</p>
+          <p><strong>You will now compare a few user interface mockups for a new app.</strong></p>
+          <p>On the top of the screen, you will be given a scenario and a related task.</p>
+          <p>Below that, you will see two versions (1 and 2) of an interface supporting this task.</p>
+          <p>Please choose in which version you think <strong>you personally would be more likely to do the task</strong>.</p>
+
+          <img src="{{ url_for('static', filename='img/explanation.png') }}" class="explainer">
+
+          <div class="actions">
+            <a href="javascript:next()" class="btn">OK, let's go</a>
+          </div>
+        </div>
+
+        {% for pair in comparison_pairs %}
+          <div id="step{{loop.index}}">
+
+            <p><strong>Scenario</strong></p>
+            <p>You joined an application that aims to gather ideas to improve conditions in your community, e.g. the members of your university, workplace, or neighborhood. We want as many people as possible to participate, because not everyone knows about the troubles of everyone else. The officials have agreed to monitor the community’s ideas and follow-up with concrete steps once an issue has been identified.</p>
+            <p>This is the main screen of the app that you are presented with just after signup.</p>
+            <p>The task that this design affords is to contribute a new idea.</p>
+
+            <div class="box">
+              <p>In which version <strong>would you personally be more likely to contribute an idea?</strong></p>
+
+              <p style="text-align: center"><strong>Comparison {{loop.index}} of {{comparison_pairs|length}}</strong></p>
+              {% set cloop = loop %}
+              <ul class="compare">
+              {% for item in pair['items'] %}
+                <li>
+                  <img src="{{ url_for('static', filename='img/' + item + '.png') }}">
+                  <label><input type="radio" name="{{pair['key']}}" value="{{item}}"> Version {{loop.index}}</label></li>
+              {% endfor %}
+              </ul>
+            </div>
+              <div class="actions">
+                <input type="submit" class="btn" value="Next">
+              </div>
+            
+          </div>
+        {% endfor %}
+      </div>
+    </form>
+  </div>
+<script>
+var step = -1;
+function next() {
+  var num_steps = document.getElementById('steps').children.length;
+  if (step+1 >= num_steps) {
+    document.getElementById('compare_form').submit();
+  } else {
+    if (step >= 0) {
+      document.getElementById('step'+step).style.display = 'none';
+      document.querySelectorAll('#step'+step+' input').forEach(function(elem){elem.required=false;});
+    }
+    step++;
+    document.getElementById('step'+step).style.display = 'block';
+    document.querySelectorAll('#step'+step+' input').forEach(function(elem){elem.required=true;});
+  }
+}
+document.addEventListener("DOMContentLoaded", function() {
+  next();
+  document.getElementById('compare_form').addEventListener("submit", function(e) {
+    e.preventDefault();
+    next();
+  });
+});
+</script>
+<style>
+.steps > div {
+  display: none;
+}
+</style>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UI Design Pilot Study</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div id="content"> 
+      <div class="progress">
+          <div class="completed" style="width: {{100*completed_count/total_count}}%"></div>
+          <div class="status">Completed {{completed_count}} of {{total_count}} questions ({{(100*completed_count)//total_count}}%)</div>
+        </div> 
+
+    <h1>Step 2 / 4</h1>  
+    <p>Great job! We appreciate your honest answers.</p>
+    <p>The following questions are about volunteering. Please try to answer them as good as you can.</p>
+
+    <hr>
+    
+    <form method="post">
+
+        <p><strong>In the past three months, how often, on average, did you participate in volunteering activities?</strong><br>
+          <select name="frequency">
+              <option value="0">Never</option>
+              <option value="1">Less than one time per week</option>
+              <option value="2">About one time per week</option>
+              <option value="3">Two to three times per week</option>
+              <option value="4">Four to five times per week</option>
+              <option value="5">More than five times per week</option>
+            </select>
+        </p>
+        
+        <hr>
+
+        <p>Please indicate to what extent each of the following items correspond to your personal motives for engaging in volunteering.</p>
+        <p><strong>I volunteer...</strong></p>
+        <ul class="answers numeric-bullet msv-survey">
+        {% for item in vignette %}
+        {% set qloop = loop %}
+          <li>
+            <div class="answer-text">{{item.text}}</div>
+            <div class="rating-container">
+              <div class="rating">
+              {% for rating in range(1, 6) %}
+                <label>
+                    <input type="radio" name="mvs_{{item.key}}" value="{{rating}}" required>
+                    {{rating}}
+                </label>
+              {% endfor %}
+              </div>
+              <div class="rating">
+                <span>corresponds<br>not at all</span>
+                <span></span>
+                <span>corresponds<br>to a great extent</span>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    <hr>
+    
+    <div class="actions">
+      <input type="submit" class="btn" value="Continue">
+    </div>
+
+    </form>
+  </div>
+  <script>
+    function fill_debug() {
+      var q = 0;
+      var a = 0;
+      var name;
+      for(q=0; q<12; q++) {
+        for(a=0; a<3; a++) {
+          name = 'rating_' + q + '_' + a;
+          document.forms[0].elements[name][a].checked = true;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

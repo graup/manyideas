@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Step 4 / 4: Assessment</h1>  
+
+  <p>You're almost done!</p>
+  <p>With your help, we would like to examine how users perceive the usability and aesthetics of Many Ideas, so that we can improve the app.</p>
+  <p>The following word pairs will help you for your assessment. They represent stark contrasts and can be subdivided into further rating levels.</p>
+  <p>Remember that there are no "right" or "wrong" answers - your personal experience and opinion is what counts.</p>
+
+  <hr>
+  
+  <form method="post">
+    {% include 'survey-items.html' %}
+  
+    <div class="actions">
+      <input type="submit" class="btn" value="Continue">
+    </div>
+  </form>
+{% endblock %}

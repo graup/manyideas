@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Step 2 / 4: Attitudes towards volunteering</h1>  
+  <p>Great job! We appreciate your honest answers.</p>
+  <p>The following questions are about volunteering. Please try to answer them as good as you can.</p>
+
+  <hr>
+  
+  <form method="post">
+    {% include 'survey-items.html' %}
+    
+    <div class="actions">
+      <input type="submit" class="btn" value="Continue">
+    </div>
+  </form>
+  <script>
+    function fill_debug() {
+      var q = 0;
+      var a = 0;
+      var name;
+      for(q=0; q<12; q++) {
+        for(a=0; a<3; a++) {
+          name = 'rating_' + q + '_' + a;
+          document.forms[0].elements[name][a].checked = true;
+        }
+      }
+    }
+  </script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Step 1 / 4: Personality</h1>  
+  <p><strong>Please take the following personality test consisting of 14 items.</strong></p>
+  <p>These items refer to a series of hypothetical scenarios. Each scenario describes an incident and lists three ways of responding to it. Please <strong>read</strong> each scenario, <strong>imagine</strong> yourself in that situation, and then <strong>rate the likeliness</strong> of each of the possible responses. Here are some tips:</p>
+  <ul>
+    <li>We all respond in a variety of ways to situations, and probably most or all responses are at least slightly likely for you.</li>
+    <li>If it is very unlikely that you would respond the way described in a given response, you should select answer 1 or 2.</li>
+    <li>If it is moderately likely, you would select a number in the mid range.</li>
+    <li>If it is very likely that you would respond as described, you would select answer 6 or 7.</li>
+  </ul>
+
+  <p><strong>Please take your time.</strong> This questionaire is an important part of this survey.</p>
+  
+  <hr>
+
+  <form method="post">
+    {% include 'survey-items.html' %}
+    <div class="actions">
+      <input type="submit" class="btn" value="Continue">
+    </div>
+  </form>
+
+  <script>
+    function fill_debug() {
+      var q = 0;
+      var a = 0;
+      var name;
+      for(q=0; q<12; q++) {
+        for(a=0; a<3; a++) {
+          name = 'rating_' + q + '_' + a;
+          document.forms[0].elements[name][a].checked = true;
+        }
+      }
+    }
+  </script>
+{% endblock %}

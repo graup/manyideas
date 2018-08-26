@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <form method="post">
+  <h1>환영합니다!</h1>
+  <p>이 설문 조사에는 4 페이지가 있습니다: <br>
+     (1) 성격 테스트, <br>
+     (2) 자원 봉사에 관한 질문, <br>
+     (3) Many Ideas 사용 경험에 관한 질문, <br>
+     (4) Many Ideas에 대한 평가.
+  </p>
+  <p>이후 설문조사는 영어로 진행됩니다. 이 점 양해 부탁드립니다.</p>
+  <p>20분 정도 소요되며 모든 응답자에게 7천원의 사례비를 드립니다.</p>
+  <p>Please don't rush, and answer the questions with full concentration.
+    Your responses are important for our research on improving the experience of voluntary partcipation systems.</p>
+  <p>Remember that there are no "right" or "wrong" answers - your personal experience and opinion is what counts.</p>
+  <p>To start, please <strong>enter the email adress you used to signup for Many Ideas</strong> and press Start.</p>
+
+  <!--<p>Your user id: {{user_id}}#{{user_counter}}</p>-->
+
+  <div class="actions">
+    <div class="box">
+      <label>
+        Email address used to sign up:
+        <input type="email" class="single-line-text-field" required name="email">
+      </label>
+    </div>
+    
+    <input type="submit" class="btn" value="Start">
+  </div>
+  </form>
+{% endblock %}

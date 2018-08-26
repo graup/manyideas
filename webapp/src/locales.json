@@ -1,0 +1,12 @@
+{
+  "en": {
+    "pull-to-reload": "Pull to reload",
+    "release-to-reload": "Release to reload",
+    "loading": "Loading..."
+  },
+  "ko": {
+    "pull-to-reload": "Pull to reload",
+    "release-to-reload": "Release to reload",
+    "loading": "로드 중..."
+  }
+}

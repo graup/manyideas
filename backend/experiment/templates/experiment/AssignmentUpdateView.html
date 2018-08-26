@@ -1,0 +1,126 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
+
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+
+<div id="content-main">
+  <div class="assignment-stats">
+      {% for t in stats %}
+      <div class="assignment" style="flex: {% widthratio t.display_ratio 1 100  %}">
+        <strong>{{t.label}}</strong><br>
+        {{t.assignment__group}}<br>
+        N={{t.count}}
+        ({% widthratio t.ratio 1 100 %}%, target: {% widthratio t.target_assignment_ratio 1 100 %}%)
+      </div>
+      <div class="assignment-distance" style="flex: {% widthratio t.ratio_distance 1 100  %}">
+      </div>
+      {% endfor %}
+    </div>
+<p>
+  N={{total_n}}.
+  Next auto assignment will be:
+    {% for t in next_assignments %}
+      {{t.name}}/{{t.assignment__group}}
+      {% widthratio t.ratio 1 100 %}% -> {% widthratio t.new_ratio 1 100 %}%,
+    {% endfor %}
+</p>
+
+<form method="post">{% csrf_token %}
+    <input type="submit" value="Update" />
+<div class="inline-group">
+  <div class="tabular inline-related">
+  {{ formset.management_form }}
+   <h2>User Treatment Assignments</h2>
+   {{ formset.non_form_errors }}
+
+   {% for dict in formset.errors %}
+    {% for error in dict.values %}
+        {{ error }}
+    {% endfor %}
+{% endfor %}
+
+   <table width="100%" class="assignment-table">
+    <thead>
+        {% for form in formset %}
+            {% if forloop.first %}
+                {% for field in form.visible_fields %}
+                    <th>{{ field.label_tag }}</th>
+                {% endfor %}
+                <th>Assigned</th>
+    </thead>
+    <tbody>
+        {% endif %}
+          <tr>
+            {% for hidden in form.hidden_fields %}
+              {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+              <td>
+                {{ field }}
+                {{ field.errors }}
+              </td>
+            {% endfor %}
+            <td>{% if form.instance.assigned_date %}{{ form.instance.assigned_date|date:"Y/m/d H:i:s" }}{% else %} unassigned {% endif %}</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+</table>
+  </div>
+</div>
+<input type="submit" value="Update" />
+</form>
+
+<style>
+  .assignment-table td ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  .assignment-table td ul li {
+    flex: 1;
+    list-style: none;
+  }
+  .assignment-table td ul li label {
+    text-indent: -1.2em;
+    margin-left: 1.2em;
+    display: block;
+    cursor: pointer;
+    padding: .5em 0;
+  }
+  .assignment-table td ul li label:hover {
+    background-color: #f0f0f0;
+  }
+
+  .assignment-stats {
+    width: 100%;
+    background-color: #f0f0f0;
+    display: flex;
+    margin-bottom: 20px;
+  }
+  .assignment-stats .assignment {
+    border-left: 4px solid #777;
+    padding: 10px;
+    font-size: 95%;
+    white-space: nowrap;
+  }
+  .assignment-stats .assignment-distance {
+    text-align: center;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      #f39696 10px,
+      #f39696 20px
+    );
+  }
+</style>
+
+</div>
+{% endblock %}

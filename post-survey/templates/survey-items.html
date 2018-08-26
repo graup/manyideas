@@ -1,0 +1,74 @@
+
+   
+<table class="questions">
+  
+{% for item in vignette.get_items(vignette.randomize, user_counter) %}
+{% set qloop = loop %}
+  <tbody class="question">
+    <tr><td colspan="100%" class="answer-text">{{item.text}}</td></tr>
+  </tbody>
+  <tbody class="answers">
+    {% for answer in item.get_items(vignette.randomize, vignette.flip_answers, user_counter) %}
+    {% if not item.free_form and (loop.index0 % 7 == 0 and item.answers|length > 10 or loop.index0 == 0) %}
+    </tbody>
+    <tbody class="question">
+      {% if item.scale_labels %}
+      <tr>
+          <td class="rating" colspan="100%" style="text-align: center;">
+            <span style="float: right"> {{item.scale_labels[-1]}}</span>
+            <span style="float: left"> {{item.scale_labels[0]}}</span>
+            &nbsp;{% if item.scale_labels|length > 2 %}{{item.scale_labels[1]}}{% endif %}
+          </td>
+      </tr>
+      {% endif %}
+      {% if not vignette.flip_answers %}
+    <tr>
+        <td class="rating space"></td>
+        {% for rating in vignette.scale %}
+        <td class="rating">{{rating}}</td>
+        {% endfor %}
+        <td class="rating space"></td>
+      </tr>
+      {% endif %}
+    </tbody><tbody class="answers">
+    {% endif %}
+    {% set aloop = loop %}
+    
+      {% if answer.text %}
+      <tr>
+        <td class="answer-text" colspan="100%"><span>
+          {{loop.index}}. {{answer.text}}
+        </span></div>
+      </tr>
+      {% endif %}
+      <tr>
+        {% if item.free_form %}
+        <td colspan="100%">
+          <textarea class="text-field" name="{{item.name}}_{{answer.key}}" placeholder="Enter your reponse here..."></textarea>
+        </td>
+        {% else %}
+        <td class="space" style="text-align:right">
+          {% if answer.high_low and not answer.flip %}{{answer.high_low[0] | safe}}{% endif %}
+          {% if answer.high_low and answer.flip %}{{answer.high_low[1] | safe}}{% endif %}
+        </td>
+        {% set scale = vignette.scale %}
+        {% if answer.flip %}
+          {% set scale = vignette.scale[::-1] %}
+        {% endif %}
+        {% for rating in scale %}
+        <td class="rating">
+          <label>
+            <input type="radio" name="{{item.name}}_{{qloop.index0}}_{{answer.key}}" value="{{rating}}" required>
+          </label>
+        </td>
+        {% endfor %}
+        <td class="space">
+            {% if answer.high_low and not answer.flip %}{{answer.high_low[1] | safe}}{% endif %}
+            {% if answer.high_low and answer.flip %}{{answer.high_low[0] | safe}}{% endif %}
+        </td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+  </tbody>
+{% endfor %}
+</table>
