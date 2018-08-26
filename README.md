@@ -14,6 +14,14 @@ Personalized Motivation-supportive Messages for Increasing Participation in Crow
 - webapp: Vue.js-based mobile web application
 - website: Simple landing page with link to the actual webapp.
 
+## Roadmap
+
+I'm currently working on improving the code for easier reuse by others. This includes:
+
+- Refactoring of the pilot-study Flask code to be usable by other surveys
+- Refactoring the context specific contents so that the app can be redeployed easily in other contexts
+- Improving documentation
+
 ## Local setup
 
 (Instructions are being updated)
